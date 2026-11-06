@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Submit an event · Shock Tracker</title><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script></head>
+<body><header><a href="./" class="brand">◉ Shock Tracker</a><span>Research submission pilot</span></header>
+<main><div class="intro"><p class="eyebrow">BUILDING A SHARED RECORD</p><h1>Help document<br>a hazard event.</h1><p>Share what happened, where it happened, and the sources that document it. Each submission goes to researchers for review.</p><aside>This form is for research. It is not monitored for emergency assistance.</aside></div>
+<section class="card" aria-labelledby="form-title"><h2 id="form-title">Submit an event</h2><p class="muted">All fields are required unless marked optional.</p><p id="setup" role="status"></p>
+<form id="event-form">
+<label for="title">Event title</label><input id="title" name="title" required minlength="3" maxlength="200" placeholder="e.g. Earthquake and tsunami near…">
+<div class="row"><div><label for="event_date">Event date <small>(optional)</small></label><input id="event_date" name="event_date" type="date"><small>Leave blank if the exact date is unknown.</small></div><div><label for="location">Affected location</label><input id="location" name="location" required maxlength="300" placeholder="Town / region, country or countries"></div></div>
+<fieldset><legend>Hazard types</legend><p class="muted">Select all that apply to this event.</p><div id="hazards" class="hazards"></div></fieldset>
+<label for="description">Short description</label><textarea id="description" name="description" rows="5" required minlength="20" maxlength="5000" placeholder="Describe the event and, if relevant, how the hazards were connected."></textarea><small>20–5,000 characters. Do not include private personal information.</small>
+<label for="sources">Reference links</label><textarea id="sources" name="sources" rows="3" required maxlength="21000" placeholder="https://example.org/report"></textarea><small>One full http:// or https:// link per line. Up to 10 links.</small>
+<button id="submit" type="submit" disabled>Submit for review <span aria-hidden="true">→</span></button><p id="message" role="status" aria-live="polite" tabindex="-1"></p>
+</form></section></main><footer>Shock Tracker · Contributed reports are unverified until reviewed.</footer></body></html>
