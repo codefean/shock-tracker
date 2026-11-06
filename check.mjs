@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import {payloadFrom,coordinate} from './docs/validation.mjs';
-import {causes,impacts,scales} from './docs/categories.mjs';
+import {payloadFrom,coordinate} from './validation.mjs';
+import {causes,impacts,scales} from './categories.mjs';
 function sample(overrides={}) {
  const data=new FormData();
  const fields={title:'Test shock report',location:'Stockholm Resilience Center',description:'A test report for validating new shock fields.',sources:'https://example.org/report\nhttps://example.org/report',event_date:'2024-02-29',latitude:'59.354554337368825',longitude:'18.055187026593714',cause_origin:'Both',cause_categories:['Floods/Flash Floods','Policy/Political statement'],impact_categories:['Ecosystems','Trade'],impact_scale:scales[0],cause_description:'Test cause explanation',reference_excerpt:'Test excerpt — https://example.org/report',...overrides};
