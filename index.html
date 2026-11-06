@@ -1,14 +1,33 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Submit an event · Shock Tracker</title><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script></head>
-<body><header><a href="./" class="brand">◉ Shock Tracker</a><span>Research submission pilot</span></header>
-<main><div class="intro"><p class="eyebrow">BUILDING A SHARED RECORD</p><h1>Help document<br>a hazard event.</h1><p>Share what happened, where it happened, and the sources that document it. Each submission goes to researchers for review.</p><aside>This form is for research. It is not monitored for emergency assistance.</aside></div>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Submit an event · Shock Tracker</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css?v=2"><script defer src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script><script type="module" src="app.js?v=2"></script></head>
+<body><header><a href="./" class="brand">◉ Shock Tracker</a><span>Research submission pilot · v2</span></header>
+<main><div class="intro"><p class="eyebrow">BUILDING A SHARED RECORD</p><h1>Help document<br>a shock event.</h1><p>Map where it happened, describe its causes, and record who or what was affected. Each submission goes to researchers for review.</p><aside>This form is for research. It is not monitored for emergency assistance.</aside></div>
 <section class="card" aria-labelledby="form-title"><h2 id="form-title">Submit an event</h2><p class="muted">All fields are required unless marked optional.</p><p id="setup" role="status"></p>
 <form id="event-form">
-<label for="title">Event title</label><input id="title" name="title" required minlength="3" maxlength="200" placeholder="e.g. Earthquake and tsunami near…">
-<div class="row"><div><label for="event_date">Event date <small>(optional)</small></label><input id="event_date" name="event_date" type="date"><small>Leave blank if the exact date is unknown.</small></div><div><label for="location">Affected location</label><input id="location" name="location" required maxlength="300" placeholder="Town / region, country or countries"></div></div>
-<fieldset><legend>Hazard types</legend><p class="muted">Select all that apply to this event.</p><div id="hazards" class="hazards"></div></fieldset>
-<label for="description">Short description</label><textarea id="description" name="description" rows="5" required minlength="20" maxlength="5000" placeholder="Describe the event and, if relevant, how the hazards were connected."></textarea><small>20–5,000 characters. Do not include private personal information.</small>
+<label for="title">Event title</label><input id="title" name="title" required minlength="3" maxlength="200" placeholder="e.g. Flooding and landslides in…">
+<label for="event_date">Event date <small>(optional)</small></label><input id="event_date" name="event_date" type="date"><small>Leave blank if the exact date is unknown.</small>
+<h3>Where did it happen?</h3>
+<label for="location">Affected location</label><div class="search-row"><input id="location" name="location" required maxlength="300" placeholder="e.g. Juneau, Alaska" autocomplete="off" aria-describedby="location-help"><button id="search" type="button">Search map</button></div>
+<small id="location-help">Type a place and search, then choose a result. You can also enter a location and coordinates manually.</small>
+<p id="map-status" role="status" aria-live="polite"></p><div id="search-results"></div>
+<div id="map" role="region" aria-label="Event location map. Click to place a pin or use the coordinate fields below."></div>
+<small>Click the map or drag the pin to the event location. A search result is a starting point, not necessarily an exact location. For widespread events, choose a representative point.</small>
+<div class="row"><div><label for="latitude">Latitude</label><input id="latitude" name="latitude" type="text" inputmode="decimal" required placeholder="59.354554337368825"></div><div><label for="longitude">Longitude</label><input id="longitude" name="longitude" type="text" inputmode="decimal" required placeholder="18.055187026593714"></div></div><small>Decimal numbers only, latitude first. Use a minus sign for south or west; no N, S, E, or W.</small>
+<p class="map-credit">Place search: <a href="https://photon.komoot.io/">Photon</a> / <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Search text is sent to Photon; map tiles are loaded from OpenStreetMap.</p>
+<h3>What caused the shock?</h3>
+<label for="cause_origin">Cause origin</label><select id="cause_origin" name="cause_origin" required><option value="">Choose an origin</option><option>Natural</option><option>Human</option><option>Both</option></select>
+<div class="field-label" id="cause-label">Categorise the causes of the shock event</div><p class="muted hint" id="cause-help">Select all causes you can identify. If you chose Both, include human and natural causes.</p>
+<details class="multi" id="cause-dropdown"><summary aria-describedby="cause-help">Choose causes <span class="selection-count">0 selected</span></summary><div class="options" id="cause-options" role="group" aria-labelledby="cause-label"></div></details><p class="selection-preview" id="cause-selected"></p>
+<label for="description">Short description</label><textarea id="description" name="description" rows="4" required minlength="20" maxlength="5000" placeholder="Describe what happened."></textarea><small>20–5,000 characters. Do not include private personal information.</small>
+<label for="cause_description">Description of the cause <small>(optional)</small></label><textarea id="cause_description" name="cause_description" rows="4" maxlength="5000" placeholder="Explain the causes and how they may be connected."></textarea>
+<label for="reference_excerpt">Relevant information from your references <small>(optional)</small></label><textarea id="reference_excerpt" name="reference_excerpt" rows="5" maxlength="10000" placeholder="Paste a relevant excerpt and identify the source URL it came from."></textarea><small>Up to 10,000 characters. Include only relevant text you are permitted to share, without private personal information.</small>
 <label for="sources">Reference links</label><textarea id="sources" name="sources" rows="3" required maxlength="21000" placeholder="https://example.org/report"></textarea><small>One full http:// or https:// link per line. Up to 10 links.</small>
+<h3>Who or what was impacted?</h3>
+<div class="field-label" id="impact-label">Categorise who and/or what was impacted</div><p class="muted hint" id="impact-help">Select all that apply.</p>
+<details class="multi" id="impact-dropdown"><summary aria-describedby="impact-help">Choose impacts <span class="selection-count">0 selected</span></summary><div class="options" id="impact-options" role="group" aria-labelledby="impact-label"></div></details><p class="selection-preview" id="impact-selected"></p>
+<label for="impact_scale">Scale of shock impact</label><select id="impact_scale" name="impact_scale" required><option value="">Choose a scale</option></select>
 <button id="submit" type="submit" disabled>Submit for review <span aria-hidden="true">→</span></button><p id="message" role="status" aria-live="polite" tabindex="-1"></p>
 </form></section></main><footer>Shock Tracker · Contributed reports are unverified until reviewed.</footer></body></html>
