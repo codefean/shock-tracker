@@ -1,5 +1,4 @@
--- Upgrade the EXISTING Shock Tracker database. Do not rerun the original setup.sql.
--- Transactional: any failure rolls back the entire migration. Existing rows stay intact.
+
 begin;
 alter table public.shock_submissions
   add column schema_version integer not null default 1,
