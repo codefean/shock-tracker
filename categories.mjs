@@ -29,7 +29,7 @@ export const causes = [
   "Law/Litigation",
   "Policy/Political statement",
   "Economic/Financial",
-  "Diplomacy"
+  "Diplomacy",
 ];
 
 export const impacts = [
@@ -42,12 +42,12 @@ export const impacts = [
   "Built infrastructure (e.g. homes, buildings, roads)",
   "Food systems (production and provisioning of food)",
   "Security and conflict (regional or national)",
-  "Culture"
+  "Culture",
 ];
 
 export const scales = [
   "Local: impacts to the town, city, region",
   "National: impacts across the whole country",
   "Sub-continental: impact to a large section of the continent, more than one country",
-  "Global: impact across continents"
+  "Global: impact across continents",
 ];
