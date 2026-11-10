@@ -1,4 +1,4 @@
--- Run AFTER setup.sql in the Supabase SQL Editor. All test rows are rolled back.
+
 begin;
 set local role anon;
 insert into public.shock_submissions (title,location,hazards,description,sources)
